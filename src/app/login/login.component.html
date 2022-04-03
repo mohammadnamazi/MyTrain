@@ -1,0 +1,35 @@
+<form #postForm="ngForm" (ngSubmit)="CreatePost(postForm.value)">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        required
+        ngModel
+        name="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        required
+        ngModel
+        name="password"
+      />
+    </div>
+    <br>
+    
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="!postForm.valid"
+    >
+      GetToken
+    </button>
+  </form>
+  
+

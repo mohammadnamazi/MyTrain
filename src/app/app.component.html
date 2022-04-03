@@ -1,51 +1,12 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="text"
-              class="form-control"
-              id="email"
-              required
-              ngModel
-              name="email"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              required
-              ngModel
-              name="password"
-            />
-          </div>
-          <br>
-          
-          <button
-            class="btn btn-primary"
-            type="submit"
-            [disabled]="!postForm.valid"
-          >
-            GetToken
-          </button>
-        </form>
+        <app-login></app-login>
         <hr>
-        <button
-        class="btn btn-primary" (click)="onFetchUsers()"
-          >
-            Get Users
-          </button>
-          <hr>
-          <textarea class="form-control"
-          id="content" *ngFor="let item of Users">
-          {{item}}
-          </textarea>
-      </div>
+  <app-getusers></app-getusers>
     </div>
   </div>
+</div>
+
+  
   

@@ -1,0 +1,11 @@
+<button
+  class="btn btn-primary" (click)="FetchUsers()"
+    >
+      Get Users
+    </button>
+    <hr>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of a.Users">
+        <b>Id</b> : {{item.id}} - <b>Name</b> : {{item.firstName}} - <b>LastName</b> : {{item.lastName}}
+      </li>
+    </ul>
