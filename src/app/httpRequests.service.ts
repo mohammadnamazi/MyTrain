@@ -1,22 +1,32 @@
 import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs";
+import { delay, map } from "rxjs";
 import { AppComponent } from "./app.component";
+import { LocalStorageService } from "./LocalStorage.service";
 import { User } from "./user.model";
 
 export class HttpRequests 
 {
     constructor(private http: HttpClient) {}
     Users : User[] = [];
-public onCreatePost(postData: { email: string; password: string }) {
+    responseToken ='';
+public async onCreatePost(postData: { email: string; password: string }) {
     // Send Http request
-    this.http
+     this.http
       .post<{Token : string}>(
         'https://localhost:7209/Token',
         postData)
       .subscribe(responseData => {
-        console.log(responseData.Token);
-        AppComponent.responseToken = responseData.Token ;
+        
+        setTimeout(() => {
+          console.log('sleep');
+          this.responseToken =  responseData.Token;
+          console.log(this.responseToken);
+          LocalStorageService.set('Token',this.responseToken);
+          // And any other code that should run only after 5s
+        }, 5000);
+
       });
+
   }
 
   onFetchUsers() {
@@ -27,10 +37,6 @@ public onCreatePost(postData: { email: string; password: string }) {
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
             userArray.push({  ...responseData[key] });
-            console.log('response data');
-            console.log( responseData[key]);
-            console.log('userarr');
-            console.log(userArray);
           }
         }
         return userArray;

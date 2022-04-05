@@ -6,17 +6,27 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { LoginComponent } from './login/login.component';
 import { GetusersComponent } from './getusers/getusers.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+
+const appRouts : Routes = [
+  {path : '' , component:HomeComponent},
+  {path:'LogIn' , component : LoginComponent},
+  {path:'getUsers' , component : GetusersComponent}
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    GetusersComponent
+    GetusersComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRouts)
   ],
   providers: [
     {
