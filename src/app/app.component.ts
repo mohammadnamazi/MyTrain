@@ -11,7 +11,7 @@ import { User } from './user.model';
 export class AppComponent {
   title = 'MyTrain';
   public static responseToken ='';
- 
+  
   hasan = [1,2,3,4];
   constructor(private http: HttpClient) {}
   

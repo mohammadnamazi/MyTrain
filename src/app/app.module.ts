@@ -8,11 +8,13 @@ import { LoginComponent } from './login/login.component';
 import { GetusersComponent } from './getusers/getusers.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { CreateusersComponent } from './createusers/createusers.component';
 
 const appRouts : Routes = [
   {path : '' , component:HomeComponent},
   {path:'LogIn' , component : LoginComponent},
-  {path:'getUsers' , component : GetusersComponent}
+  {path:'getUsers' , component : GetusersComponent},
+  {path:'createUsers' , component : CreateusersComponent}
 ]
 
 @NgModule({
@@ -20,7 +22,8 @@ const appRouts : Routes = [
     AppComponent,
     LoginComponent,
     GetusersComponent,
-    HomeComponent
+    HomeComponent,
+    CreateusersComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ const appRouts : Routes = [
       multi: true
     }
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

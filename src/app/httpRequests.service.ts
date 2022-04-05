@@ -1,36 +1,38 @@
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { delay, map } from "rxjs";
 import { AppComponent } from "./app.component";
 import { LocalStorageService } from "./LocalStorage.service";
 import { User } from "./user.model";
 
+@Injectable()
 export class HttpRequests 
 {
+  
     constructor(private http: HttpClient) {}
     Users : User[] = [];
     responseToken ='';
-public async onCreatePost(postData: { email: string; password: string }) {
+public  onLogIn(postData: { email: string; password: string }) {
     // Send Http request
-     this.http
+    return this.http
       .post<{Token : string}>(
         'https://localhost:7209/Token',
+        postData);
+  }
+
+  public createUser(postData: { userName : string,groupid : string,lastName : string,firstName : string,id : number,email: string; password: string }) {
+    // Send Http request
+     this.http
+      .post(
+        'https://localhost:7209/User/Add',
         postData)
       .subscribe(responseData => {
-        
-        setTimeout(() => {
-          console.log('sleep');
-          this.responseToken =  responseData.Token;
-          console.log(this.responseToken);
-          LocalStorageService.set('Token',this.responseToken);
-          // And any other code that should run only after 5s
-        }, 5000);
-
+        console.log("usercreating");
       });
 
   }
 
   onFetchUsers() {
-    
     this.http.get<{array : []}>('https://localhost:7209/User/get').pipe(
       map((responseData : {[key : number] : User}) => {
         const userArray : User[] = [];

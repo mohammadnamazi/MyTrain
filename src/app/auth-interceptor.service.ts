@@ -8,6 +8,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     console.log('Request is on its way');
+    console.log(this.JwtToken);
      if(this.JwtToken != ''){
          const modifiedRequest = request.clone({headers : request.headers.append('Authorization' , 'Bearer ' + this.JwtToken)});
          return next.handle(modifiedRequest);

@@ -1,29 +1,28 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpRequests } from '../httpRequests.service';
 import { LocalStorageService } from '../LocalStorage.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers : [HttpRequests]
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http: HttpClient,private router:Router) {}
-token = '';
+  constructor(private http : HttpRequests ,private router:Router) {}
+
   ngOnInit(): void {
   }
- a : HttpRequests = new HttpRequests(this.http); 
- CreatePost(postData: { email: string; password: string }){
-   this.a.onCreatePost(postData);
+    
+ logIn(postData: { email: string; password: string }){
+   this.http.onLogIn(postData).subscribe(responseData => {
+      LocalStorageService.set('Token', responseData.Token);
+      console.log(responseData.Token);
+      this.router.navigate(["/getUsers"]);
+  });
 }
-onNavigateToGetUsers(){
-  setTimeout(() => {
-    console.log('sleep');
-    this.router.navigate(["/getUsers"]);
-    // And any other code that should run only after 5s
-  }, 5000);
+}
 
-}
-}
+

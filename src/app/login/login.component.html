@@ -1,5 +1,5 @@
 
-<form #postForm="ngForm" (ngSubmit)="CreatePost(postForm.value)">
+<form #postForm="ngForm" (ngSubmit)="logIn(postForm.value)">
 <!-- Email input -->
       <div class="form-outline mb-4">
         <input type="email" id="email" required ngModel name="email" class="form-control" />
@@ -30,7 +30,7 @@
   </div>
 
   <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="!postForm.valid" (click)="onNavigateToGetUsers()">Sign in</button>
+  <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="!postForm.valid">Sign in</button>
 
 <!-- Register buttons -->
 <div class="text-center">
