@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpRequests } from '../httpRequests.service';
+import { PersonsService } from '../persons.service';
 
 @Component({
   selector: 'app-createusers',
   templateUrl: './createusers.component.html',
   styleUrls: ['./createusers.component.css'],
-  providers : [HttpRequests]
+  providers : [PersonsService]
 })
 export class CreateusersComponent implements OnInit {
 
-  constructor(private http : HttpRequests ) {}
+  constructor(private http : PersonsService ) {}
 
   ngOnInit(): void {
   }

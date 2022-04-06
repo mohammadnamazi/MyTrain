@@ -5,7 +5,60 @@
     </button>
     <hr>
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let item of a.Users">
+      <li class="list-group-item" *ngFor="let item of users">
         <b>Id</b> : {{item.id}} - <b>Name</b> : {{item.firstName}} - <b>LastName</b> : {{item.lastName}}
+        <button class=" btn btn-warning align-items-end " (click)="ShowEditBox(item.id)">Edit</button> |
+         <button class=" btn btn-danger align-items-end" (click)="DeleteUser(item.id)">Delete</button>
       </li>
     </ul>
+<br>
+
+    <br>
+    <form #postForm="ngForm" (ngSubmit)="EditUsers(postForm.value)" *ngIf="IsShowEditBox == true">
+      <!-- GoroupId input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="groupid">groupid</label>
+              <input type="number" id="groupid" required ngModel name="groupid" class="form-control" [(ngModel)]="selectedUser.groupId " />
+            </div>
+      
+          <!-- FirstName input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="firstName">firstName</label>
+          <input type="text" id="firstName" required ngModel name="firstName" class="form-control" [(ngModel)]="selectedUser.firstName"/>
+          
+        </div>
+        <!-- LastName input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="lastName">lastName</label>
+          <input type="text" id="lastName" required ngModel name="lastName" class="form-control" [(ngModel)]="selectedUser.lastName"/>
+        </div>
+  
+      <!-- Id input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="id">id</label>
+      <input type="number" id="id" ngModel name="id" class="form-control" readonly [(ngModel)]="selectedUser.id"/>
+      
+    </div>
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="email">Email address</label>
+      <input type="email" id="email" required ngModel name="email" class="form-control" [(ngModel)]="selectedUser.email"/>
+      
+    </div>
+  
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="password">Password</label>
+  <input type="password" id="password" required ngModel name="password" class="form-control" [(ngModel)]="selectedUser.password"/>
+  
+  </div>
+  <!-- UserName input -->
+  <div class="form-outline mb-4">
+    <label class="form-label" for="userName">userName</label>
+      <input type="text" id="userName" required ngModel name="userName" class="form-control" [(ngModel)]="selectedUser.userName"/>
+      
+    </div>
+          <br>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="!postForm.valid">Create</button>
+        </form>

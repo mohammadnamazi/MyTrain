@@ -6,7 +6,7 @@ import { LocalStorageService } from "./LocalStorage.service";
 import { User } from "./user.model";
 
 @Injectable()
-export class HttpRequests 
+export class PersonsService 
 {
   
     constructor(private http: HttpClient) {}
@@ -24,18 +24,22 @@ public  onLogIn(postData: { email: string; password: string }) {
     // Send Http request
      this.http
       .post(
-        'https://localhost:7209/User/Add',
+        'https://localhost:7209/Person/Add',
         postData)
       .subscribe(responseData => {
-        console.log("usercreating");
       });
-
   }
 
-  onFetchUsers() {
-    this.http.get<{array : []}>('https://localhost:7209/User/get').pipe(
+  public OnDeleteUser(id: number){
+    this.http.delete('https://localhost:7209/Person/Delete?id='+id).subscribe(responseData => {
+    })
+  }
+
+  onFetchUsers() : User[] {
+    const userArray : User[] = [];
+    this.http.get<{array : []}>('https://localhost:7209/Person/get').pipe(
       map((responseData : {[key : number] : User}) => {
-        const userArray : User[] = [];
+        
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
             userArray.push({  ...responseData[key] });
@@ -44,11 +48,21 @@ public  onLogIn(postData: { email: string; password: string }) {
         return userArray;
       })
     ).subscribe(responseDataUsers => {
-      console.log(responseDataUsers);
       this.Users = responseDataUsers;
-      console.log(this.Users);
       //console.log(responseDataUsers);
       }
       );
+      return userArray;
+  }
+  public EditUser(postData: { userName : string , groupid : number, lastName : string,firstName : string , id : number,email: string; password: string }) {
+    // Send Http request
+    console.log(postData.id);
+     this.http
+      .put(
+        'https://localhost:7209/Person/Update',
+        postData)
+      .subscribe(responseData => {
+        console.log("usercreating");
+      });
   }
 }

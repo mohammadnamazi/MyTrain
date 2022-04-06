@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpRequests } from '../httpRequests.service';
+import { PersonsService } from '../persons.service';
 import { LocalStorageService } from '../LocalStorage.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers : [HttpRequests]
+  providers : [PersonsService]
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private http : HttpRequests ,private router:Router) {}
+  constructor(private http : PersonsService ,private router:Router) {}
 
   ngOnInit(): void {
   }
