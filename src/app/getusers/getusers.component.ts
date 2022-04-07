@@ -12,6 +12,7 @@ export class GetusersComponent implements OnInit {
 users : User[] = [];
 selectedUser: User = new User();
 IsShowEditBox : boolean = false;
+error = null;
   constructor(private http : PersonsService) {}
 
   ngOnInit(): void {
@@ -32,6 +33,8 @@ for (let i = 0; i < this.users.length; i++) {
 }
 }
 EditUsers(postData: { userName : string,groupid : number,lastName : string,firstName : string,id : number,email: string; password: string }){
-this.http.EditUser(postData);
+this.http.EditUser(postData).subscribe(response => { } , error => {
+  this.error = error.message ;
+});
 }
 }

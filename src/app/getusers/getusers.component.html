@@ -62,3 +62,7 @@
         <!-- Submit button -->
         <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="!postForm.valid">Create</button>
         </form>
+        <div class="alert alert-danger" *ngIf="error">
+<h1> an error occurred</h1>
+<p > {{error}} </p>
+  </div>

@@ -22,12 +22,10 @@ public  onLogIn(postData: { email: string; password: string }) {
 
   public createUser(postData: { userName : string,groupid : string,lastName : string,firstName : string,id : number,email: string; password: string }) {
     // Send Http request
-     this.http
+    return this.http
       .post(
         'https://localhost:7209/Person/Add',
-        postData)
-      .subscribe(responseData => {
-      });
+        postData);
   }
 
   public OnDeleteUser(id: number){
@@ -57,12 +55,9 @@ public  onLogIn(postData: { email: string; password: string }) {
   public EditUser(postData: { userName : string , groupid : number, lastName : string,firstName : string , id : number,email: string; password: string }) {
     // Send Http request
     console.log(postData.id);
-     this.http
+    return this.http
       .put(
         'https://localhost:7209/Person/Update',
-        postData)
-      .subscribe(responseData => {
-        console.log("usercreating");
-      });
+        postData);
   }
 }

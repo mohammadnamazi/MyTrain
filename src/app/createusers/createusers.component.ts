@@ -8,12 +8,14 @@ import { PersonsService } from '../persons.service';
   providers : [PersonsService]
 })
 export class CreateusersComponent implements OnInit {
-
+  error = null;
   constructor(private http : PersonsService ) {}
 
   ngOnInit(): void {
   }
   CreateUsers(postData: { userName : string,groupid : string,lastName : string,firstName : string,id : number,email: string; password: string }){
-this.http.createUser(postData);
+this.http.createUser(postData).subscribe(response => {}, error => {
+  this.error = error.message ;
+});
   }
 }
